@@ -1,0 +1,1 @@
+Group6TestBucket = "6FigureGroup6"
