@@ -1,0 +1,1 @@
+This template creates an EC2 with full access policy to s3 bucket. Also includes a bash script to enable uploading objects from ec2 to s3

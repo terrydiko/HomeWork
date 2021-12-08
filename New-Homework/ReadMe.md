@@ -1,0 +1,1 @@
+This is an ec2 and s3 with full access policy
