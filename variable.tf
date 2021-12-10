@@ -30,3 +30,9 @@ variable "ami" {
       type = string
       default = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"  
   }
+  variable "bucket_name" {
+    type = string
+  }
+  variable "role_name" {
+    type = string
+  }

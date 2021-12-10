@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "kenes3" {
-    bucket = "kenes3-bucket"
+    bucket = var.bucket_name
     acl    = "private"
   tags = {
     Name        = "My bucket"
@@ -16,9 +16,10 @@ resource "aws_s3_bucket" "kenes3" {
 resource "aws_kms_key" "kenkey" {
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10
+  enable_key_rotation = true
 }
 resource "aws_iam_role" "s3_role" {
-    name = "s3_role"
+    name = var.role_name
     assume_role_policy = jsonencode(
     {
     Version = "2012-10-17"
