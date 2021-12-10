@@ -1,4 +1,4 @@
-Please try and complete the following before next class:
+<!-- Please try and complete the following before next class:
 * clone this repo
 * create a new branch name it after your last name or if you are working as a team, the name of the team 
 * `git checkout -b <name of your branch`
@@ -18,4 +18,6 @@ Use a backend to manage the state file (we will cover this in class)
 ## Push your code to your branch once you are done 
 * `git add .`  
 * `git commit -m <"commit message">`
-* `git push --set-upstream origin <name of the branch>` 
+* `git push --set-upstream origin <name of the branch>`  -->
+
+# I have just clone the assignment
