@@ -31,7 +31,7 @@ resource "aws_iam_role" "s3_fullaccess-role" {
 
 
 resource "aws_iam_role_policy" "s3-fullaccess-role-policy" {
-  name = "s3-fullaccess-policy"
+  name = "s3_fullaccess_policy"
   role = aws_iam_role.s3_fullaccess-role.id
 
   # Terraform's "jsonencode" function converts a
@@ -40,7 +40,7 @@ resource "aws_iam_role_policy" "s3-fullaccess-role-policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "s3fullaccesspolicy-sid",
+      "Sid": "s3fullaccesspolicysid",
       "Action": "*",
       "Effect": "Allow",
       "Resource": "*"

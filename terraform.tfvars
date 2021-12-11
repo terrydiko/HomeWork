@@ -1,1 +1,1 @@
-s3-bucket-name = "kajide-homework=bucket"
+s3-bucket-name = "kajidehomeworkbucket"
