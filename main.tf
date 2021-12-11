@@ -49,7 +49,7 @@ resource "aws_iam_role_policy" "s3-fullaccess-role-policy" {
 })
 }
 
-resource "aws_iam_instance_profile" "instace_profile" {
+resource "aws_iam_instance_profile" "instance_profile" {
     name = "ec2_s3_instance_profile"
     role = aws_iam_role.s3_fullaccess-role.name
 
@@ -60,7 +60,7 @@ resource "aws_instance" "Homeworkinstance" {
     ami = "ami-0d37e07bd4ff37148"
     instance_type = "t2.micro"
     key_name = "terrkeypair"
-    iam_instance_profile = aws_iam_instance_profile.instace_profile.name
+    iam_instance_profile = aws_iam_instance_profile.instance_profile.name
     associate_public_ip_address = true
     user_data = <<EOF
 
