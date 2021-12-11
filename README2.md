@@ -1,0 +1,3 @@
+# Challenges during assignment
+
+I had a lot of trouble writing the bash script. I googled and tried to watch a couple of videos on how to write the script but found no answer. I did put in a script, but of course it didn't work. I did not even attempt the extra bonus point question because my head is pounding from all the research right now. I will take a break right now, and follow up on how to do the backend question during the next class. Thank you 
