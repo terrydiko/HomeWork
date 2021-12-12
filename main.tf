@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "hallelujahchoir" {
-  bucket = "hallelujahchoir"
+  bucket = "majoombum"
   acl    = "private"
 
   versioning {
@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "hallelujahchoir" {
 
   }
   tags = {
-    "Name" = "hallelujahchoir"
+    "Name" = "majoombum"
   }
 
 }
