@@ -19,3 +19,4 @@ Use a backend to manage the state file (we will cover this in class)
 * `git add .`  
 * `git commit -m <"commit message">`
 * `git push --set-upstream origin <name of the branch>` 
+# Check thigitgit adds out
