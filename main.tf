@@ -63,16 +63,13 @@ resource "aws_instance" "Homeworkinstance" {
     iam_instance_profile = aws_iam_instance_profile.instance_profile.name
     associate_public_ip_address = true
     user_data = <<EOF
-
     #!/bin/bash
+    
+    cd  /var/log
 
-    yum update -y
+    echo "Hello, This is a test file to upload on S3" > mybucketfile.txt
 
-    yum install httpd -y
-
-    service httpd start
-
-    chkconfig httpd on
+    aws s3 mv . s3://var.s3-bucket-name --recursive --exclude "*.DS_Store"
 
     cd /var/log/
 
