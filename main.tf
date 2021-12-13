@@ -8,6 +8,12 @@ resource "aws_s3_bucket" "Homework-bucket" {
   }
 }
 
+resource "aws_s3_bucket_object" "examplebucket_object" {
+  key = "Firstfolder"
+  bucket = aws_s3_bucket.Homework-bucket.id
+  source  = "index.html"
+  server_side_encryption = "aws:kms"
+}
 
 resource "aws_iam_role" "s3_fullaccess-role" {
   name = "homeworkrole"

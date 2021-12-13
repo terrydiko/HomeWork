@@ -8,6 +8,5 @@ terraform {
     key    = "windowsterraform/terraform.tfstate"
     region = "eu-west-2"
     dynamodb_table = "state"
-
-  }
+    }
 }
