@@ -22,8 +22,6 @@ resource "aws_s3_bucket" "Homework-bucket" {
   }
 }
 
-
-
 resource "aws_iam_role" "s3_fullaccess-role" {
   name = "homeworkrole"
 
@@ -43,7 +41,6 @@ resource "aws_iam_role" "s3_fullaccess-role" {
     ]
   })
 }
-
 
 resource "aws_iam_role_policy" "s3-fullaccess-role-policy" {
   name = "s3_fullaccess_policy"
@@ -94,7 +91,19 @@ resource "aws_instance" "Homeworkinstance" {
 
     aws s3 cp mybucketfile.txt  s3://kajidehomework001/
 
+    cd /var/log/
+
+    echo "<html><h1>Hello Cloud Gurus Welcome To My Webpage</h1></html>" >
+
+    index222.html
+
   EOF
+   provisioner "file" {
+    source      = "var/log/index222.html"
+    destination = "s3://kajidehomework001/"
+
+   }
+
 }
 
 resource "aws_s3_bucket_object" "Object-upload" {
