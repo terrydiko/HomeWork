@@ -1,3 +1,8 @@
+resource "aws_kms_key" "homeworkbucketkey" {
+  description             = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10
+}
+
 resource "aws_s3_bucket" "Homework-bucket" {
   bucket = var.s3-bucket-name
   acl    = "private"
@@ -6,14 +11,18 @@ resource "aws_s3_bucket" "Homework-bucket" {
     Name        = "My homework bucket"
     Environment = "Study"
   }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = aws_kms_key.homeworkbucketkey.arn
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
 }
 
-resource "aws_s3_bucket_object" "examplebucket_object" {
-  key = "Firstfolder"
-  bucket = aws_s3_bucket.Homework-bucket.id
-  source  = "index.html"
-  server_side_encryption = "aws:kms"
-}
+
 
 resource "aws_iam_role" "s3_fullaccess-role" {
   name = "homeworkrole"
@@ -75,7 +84,7 @@ resource "aws_instance" "Homeworkinstance" {
 
     echo "Hello, This is a test file to upload on S3" > mybucketfile.txt
 
-    aws s3 mv . s3://var.s3-bucket-name --recursive --exclude "*.DS_Store"
+    aws s3 cp mybucketfile.txt  s3://kajidehomework001/
 
     cd /var/log/
 
@@ -83,8 +92,19 @@ resource "aws_instance" "Homeworkinstance" {
 
     index.html
 
-    aws s3 mv . s3://var.s3-bucket-name --recursive --exclude "*.DS_Store"
+    aws s3 cp mybucketfile.txt  s3://kajidehomework001/
 
   EOF
 }
+
+resource "aws_s3_bucket_object" "Object-upload" {
+  bucket =aws_s3_bucket.Homework-bucket.id
+  key    = "Myobjectfolder"
+  source = "C:/Users/Pascal/OneDrive/Documents/mybucketfile.txt"
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  etag = filemd5("C:/Users/Pascal/OneDrive/Documents/mybucketfile.txt")
+}
+
 
