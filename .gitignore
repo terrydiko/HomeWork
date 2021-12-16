@@ -3,4 +3,3 @@ terraform.tfstate*
 .terraform*
 .terraform.lock*
 terraform.*
-.terraform
