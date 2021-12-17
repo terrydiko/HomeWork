@@ -74,46 +74,59 @@ resource "aws_instance" "Homeworkinstance" {
     key_name = "terrkeypair"
     iam_instance_profile = aws_iam_instance_profile.instance_profile.name
     associate_public_ip_address = true
+
     user_data = <<EOF
-    #!/bin/bash
-    
-    cd  /var/log
+
+     #!/bin/bash
+
+    # sleep until instance is ready
+      until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
+         sleep 1
+      done
+    # change directory to the below
 
     echo "Hello, This is a test file to upload on S3" > mybucketfile.txt
 
-    aws s3 cp mybucketfile.txt  s3://kajidehomework001/
+    echo "<html><h1>Hello Cloud Gurus Welcome To My Webpage</h1></html>" > index.html
 
-    cd /var/log/
 
-    echo "<html><h1>Hello Cloud Gurus Welcome To My Webpage</h1></html>" >
+    echo "<html><h1>Hello Cloud Gurus Welcome To My Webpage</h1></html>" > index222.txt
 
-    index.html
+    sudo cp mybucketfile.txt /var/log/
 
-    aws s3 cp mybucketfile.txt  s3://kajidehomework001/
+    sudo cp index.html /var/log/
 
-    cd /var/log/
+    cd var/log/
+ 
+    aws s3 mv mybucketfile.txt s3://kajidehomework001/   --recursive --exclude "*.DS_Store"
+    aws s3 mv index.html s3://kajidehomework001/   --recursive --exclude "*.DS_Store"
 
-    echo "<html><h1>Hello Cloud Gurus Welcome To My Webpage</h1></html>" >
 
-    index222.html
+    EOF
+  
+  #  provisioner "file" {
+  #   source      = "script.sh"
+  #   destination = "/home/ec2-user/script.sh"
 
-  EOF
-   provisioner "file" {
-    source      = "var/log/index222.html"
-    destination = "s3://kajidehomework001/"
+  #  }
 
-   }
+  #  provisioner "remote-exec" {
+  #   inline = [
+  #     "chmod +x /home/ec2-user/script.sh",
+  #     "/home/ec2-user/script.sh args"
+  #   ]
+  # }
 
 }
 
 resource "aws_s3_bucket_object" "Object-upload" {
   bucket =aws_s3_bucket.Homework-bucket.id
   key    = "Myobjectfolder"
-  source = "C:/Users/Pascal/OneDrive/Documents/mybucketfile.txt"
+  source = "../../../mybucketfile.txt"
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("C:/Users/Pascal/OneDrive/Documents/mybucketfile.txt")
+  etag = filemd5("../../../mybucketfile.txt")
 }
 
 
