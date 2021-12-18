@@ -98,9 +98,8 @@ resource "aws_instance" "Homeworkinstance" {
 
     cd var/log/
  
-    aws s3 mv mybucketfile.txt s3://kajidehomework001/   --recursive --exclude "*.DS_Store"
-    aws s3 mv index.html s3://kajidehomework001/   --recursive --exclude "*.DS_Store"
-
+    aws s3 mv mybucketfile.txt s3://aws_s3_bucket.Homework-bucket.id   --recursive --exclude "*.DS_Store"
+    aws s3 mv index.html s3://aws_s3_bucket.Homework-bucket.id   --recursive --exclude "*.DS_Store"
 
     EOF
   
@@ -118,6 +117,8 @@ resource "aws_instance" "Homeworkinstance" {
   # }
 
 }
+
+# ANOTHER WAY OF UPLOADING A FILE TO S3 USING TERRAFORM
 
 resource "aws_s3_bucket_object" "Object-upload" {
   bucket =aws_s3_bucket.Homework-bucket.id
